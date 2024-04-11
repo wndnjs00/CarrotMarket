@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="170dp">
+
+
+    <ImageView
+        android:id="@+id/item_iv"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/corner_item" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@+id/item_iv"
+        app:layout_constraintTop_toTopOf="@+id/item_iv">
+
+        <TextView
+            android:id="@+id/item_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제품명"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/item_area_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지역명"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/item_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="가격"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/item_comment_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:srcCompat="@drawable/chat_img"
+            tools:layout_editor_absoluteX="204dp"
+            tools:layout_editor_absoluteY="79dp" />
+
+        <TextView
+            android:id="@+id/item_comment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="16"
+            android:layout_marginStart="5dp"
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="53dp" />
+
+        <ImageView
+            android:id="@+id/item_heart_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:srcCompat="@drawable/heat_img"
+            android:layout_marginStart="12dp"
+            tools:layout_editor_absoluteX="104dp"
+            tools:layout_editor_absoluteY="30dp" />
+
+        <TextView
+            android:id="@+id/item_heart_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            android:layout_marginStart="5dp"
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="81dp"
+            tools:layout_editor_absoluteY="98dp" />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
