@@ -1,8 +1,10 @@
 package com.example.carrotmarket.presentation
 
+import android.icu.lang.UCharacter.VerticalOrientation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ReportFragment.Companion.reportFragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carrotmarket.R
 import com.example.carrotmarket.data.DataSource
@@ -27,16 +29,19 @@ class MainActivity : AppCompatActivity() {
         // 데이터리스트 가져오기
         val dataSource = DataSource.getDataSource().getProductList()
 
-        // 어뎁터와 데이터리스트 연결
+        // 어댑터와 데이터리스트 연결
         productAdpater.productList = dataSource
 
-        // 리사이클러뷰 레이아웃과 연결
+        // 리사이클러뷰 레이아웃과 어댑터연결
         with(binding.RecyclerView){
             adapter = productAdpater
         }
 
-        // layoutManager사용
+        // LinearLayoutManager사용
         binding.RecyclerView.layoutManager = LinearLayoutManager(this)
 
+        // 리사이클러뷰 구분선 표시
+        val decoration = DividerItemDecoration(binding.RecyclerView.context, LinearLayoutManager(this).orientation)
+        binding.RecyclerView.addItemDecoration(decoration)
     }
 }

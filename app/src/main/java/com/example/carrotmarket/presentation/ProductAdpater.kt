@@ -32,6 +32,7 @@ class ProductAdpater(): RecyclerView.Adapter<ProductAdpater.ProductViewHolder>()
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         // bind함수에 있는 함수를 가져와서 데이터 뿌려줌
         holder.bind(productList[position])
+
     }
 
 
@@ -50,7 +51,6 @@ class ProductAdpater(): RecyclerView.Adapter<ProductAdpater.ProductViewHolder>()
         fun bind(product: Product){
             currentProduct = product
 
-//            binding.itemIv.setImageResource(product.image)
             binding.itemNameTv.text = product.name
             binding.itemAreaTv.text = product.area
             binding.itemPriceTv.text = product.price
@@ -60,7 +60,6 @@ class ProductAdpater(): RecyclerView.Adapter<ProductAdpater.ProductViewHolder>()
             Glide.with(itemView.context)
                 .load(product.image)
                 .into(binding.itemIv)
-
         }
 
     }
