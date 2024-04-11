@@ -32,6 +32,7 @@ class ProductAdpater(): RecyclerView.Adapter<ProductAdpater.ProductViewHolder>()
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         // bind함수에 있는 함수를 가져와서 데이터 뿌려줌
         holder.bind(productList[position])
+
     }
 
 
