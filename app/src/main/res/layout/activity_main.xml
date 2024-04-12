@@ -23,15 +23,15 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="내배캠동"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/arrow_img"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/main_tv"
             app:layout_constraintStart_toEndOf="@+id/main_tv"
@@ -41,8 +41,8 @@
 
         <ImageView
             android:id="@+id/notification_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/main_tv"
             app:layout_constraintEnd_toEndOf="parent"

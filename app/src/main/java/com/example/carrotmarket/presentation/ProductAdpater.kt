@@ -1,6 +1,5 @@
 package com.example.carrotmarket.presentation
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,9 +7,11 @@ import com.bumptech.glide.Glide
 import com.example.carrotmarket.R
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ListItemBinding
+import java.text.DecimalFormat
 
 
-class ProductAdpater(): RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
+// 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현
+class ProductAdpater(private val onClick : (Product) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
 
     var productList = listOf<Product>()
 
@@ -18,7 +19,7 @@ class ProductAdpater(): RecyclerView.Adapter<ProductAdpater.ProductViewHolder>()
     // 화면(레이아웃) 연결
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-        return ProductViewHolder(ListItemBinding.bind(view))
+        return ProductViewHolder(ListItemBinding.bind(view), onClick)
     }
 
 
@@ -37,13 +38,15 @@ class ProductAdpater(): RecyclerView.Adapter<ProductAdpater.ProductViewHolder>()
 
 
 
-    class ProductViewHolder(private var binding : ListItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class ProductViewHolder(private var binding : ListItemBinding, private val onClick: (Product) -> Unit) : RecyclerView.ViewHolder(binding.root){
         private var currentProduct : Product ?= null
 
         init {
-            // 클릭 리스너
+            // 클릭 리스너 (아이템 클릭시)
             itemView.setOnClickListener {
-
+                currentProduct?.let {
+                    onClick.invoke(it)
+                }
             }
         }
 
@@ -53,13 +56,14 @@ class ProductAdpater(): RecyclerView.Adapter<ProductAdpater.ProductViewHolder>()
 
             binding.itemNameTv.text = product.name
             binding.itemAreaTv.text = product.area
-            binding.itemPriceTv.text = product.price
+            binding.itemPriceTv.text = DecimalFormat("#,###").format(product.price).toString() + "원"    // 가격은 천단위 콤마표시
             binding.itemCommentTv.text = product.comment.toString()
             binding.itemHeartTv.text = product.favorate.toString()
 
             Glide.with(itemView.context)
                 .load(product.image)
                 .into(binding.itemIv)
+
         }
 
     }
