@@ -20,9 +20,12 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val intent = getIntent()
-        var productItem = intent?.getParcelableExtra<Product>("product")
 
+        // getParcelableExtra사용해서 MainActivtiy에서 보낸 데이터 받아오기
+        val intent = getIntent()
+        val productItem = intent?.getParcelableExtra<Product>("product")
+
+        // 레이아웃과 받아온 데이터 연결
         productItem?.let { binding.detailItemIv.setImageResource(it.image) }
         productItem?.let { binding.detailSellerTv.text = it.seller }
         productItem?.let { binding.detailAreaTv.text = it.area }
