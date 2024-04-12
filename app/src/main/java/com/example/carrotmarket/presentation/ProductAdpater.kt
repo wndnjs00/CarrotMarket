@@ -1,6 +1,5 @@
 package com.example.carrotmarket.presentation
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.carrotmarket.R
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ListItemBinding
+import java.text.DecimalFormat
 
 
 // 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현
@@ -56,13 +56,14 @@ class ProductAdpater(private val onClick : (Product) -> Unit) : RecyclerView.Ada
 
             binding.itemNameTv.text = product.name
             binding.itemAreaTv.text = product.area
-            binding.itemPriceTv.text = product.price + "원"
+            binding.itemPriceTv.text = DecimalFormat("#,###").format(product.price).toString() + "원"    // 가격은 천단위 콤마표시
             binding.itemCommentTv.text = product.comment.toString()
             binding.itemHeartTv.text = product.favorate.toString()
 
             Glide.with(itemView.context)
                 .load(product.image)
                 .into(binding.itemIv)
+
         }
 
     }

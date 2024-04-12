@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.carrotmarket.R
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ActivityDetailBinding
+import java.text.DecimalFormat
 
 class DetailActivity : AppCompatActivity() {
 
@@ -26,16 +27,17 @@ class DetailActivity : AppCompatActivity() {
         val productItem = intent?.getParcelableExtra<Product>("product")
 
         // 레이아웃과 받아온 데이터 연결
-        productItem?.let { binding.detailItemIv.setImageResource(it.image) }
+        productItem?.let { binding.detailItemIv.setImageResource(it.image) }    // Glide로 바꿔보기
         productItem?.let { binding.detailSellerTv.text = it.seller }
         productItem?.let { binding.detailAreaTv.text = it.area }
         productItem?.let { binding.detailNameTv.text = it.name }
         productItem?.let { binding.detailContentTv.text = it.description }
-        productItem?.let { binding.detailPriceTv.text = it.price + "원" }
-
+        productItem?.let { binding.detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"}
 
         binding.detailLeftArrowIv.setOnClickListener {
             finish()
         }
+
+
     }
 }
