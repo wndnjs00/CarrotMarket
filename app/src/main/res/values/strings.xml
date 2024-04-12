@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CarrotMarket</string>
+    <string name="manner_degree"><u>매너온도</u></string>
 </resources>

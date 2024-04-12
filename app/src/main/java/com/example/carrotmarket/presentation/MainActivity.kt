@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     private fun adpaterOnClick(product: Product) {
         val intent = Intent(this, DetailActivity()::class.java)
          // 데이터 전달부분
-
+         intent.putExtra("product", product)
 
         startActivity(intent)
     }
