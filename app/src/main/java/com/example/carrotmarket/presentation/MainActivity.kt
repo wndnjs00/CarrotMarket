@@ -3,6 +3,10 @@ package com.example.carrotmarket.presentation
 import android.content.Intent
 import android.icu.lang.UCharacter.VerticalOrientation
 import android.os.Bundle
+import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,6 +32,25 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    // 뒤로가기 버튼 눌렀을때 실행되는 콜백메소드
+    private val onBackPressedCallback = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            // 뒤로가기 실행시 실행할 다이얼로그(기본 다이얼로그 사용)
+            val dialog = AlertDialog.Builder(this@MainActivity)
+                .setTitle("종료")
+                .setMessage("정말로 종료하시겠습니까?")
+                .setIcon(R.drawable.chat_img)
+                .setPositiveButton("확인") { dialog, id ->
+                    finish()
+                }
+                .setNegativeButton("취소"){ dialog, id ->
+                    Toast.makeText(this@MainActivity, "취소", Toast.LENGTH_SHORT).show()
+                }
+            dialog.show()   // 꼭 show적어주기!!
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -49,10 +72,16 @@ class MainActivity : AppCompatActivity() {
         // 리사이클러뷰 구분선 표시
         val decoration = DividerItemDecoration(binding.RecyclerView.context, LinearLayoutManager(this).orientation)
         binding.RecyclerView.addItemDecoration(decoration)
+
+        // 뒤로가기를 onBackPressedDispatcher를 통해 등록
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
 
-     // 클릭했을때 DetailActivity로 이동하게끔하는 함수 [ 1) 그냥 intent를 사용해서 넘기는 방법 ]
+
+
+
+     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
     private fun adpaterOnClick(product: Product) {
         val intent = Intent(this, DetailActivity()::class.java)
          // 데이터 전달 (product 전체를 전달)
