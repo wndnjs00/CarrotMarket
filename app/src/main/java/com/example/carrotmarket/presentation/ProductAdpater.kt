@@ -56,7 +56,7 @@ class ProductAdpater(private val onClick : (Product) -> Unit) : RecyclerView.Ada
 
             binding.itemNameTv.text = product.name
             binding.itemAreaTv.text = product.area
-            binding.itemPriceTv.text = product.price
+            binding.itemPriceTv.text = product.price + "원"
             binding.itemCommentTv.text = product.comment.toString()
             binding.itemHeartTv.text = product.favorate.toString()
 

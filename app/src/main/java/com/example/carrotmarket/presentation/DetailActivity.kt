@@ -28,7 +28,11 @@ class DetailActivity : AppCompatActivity() {
         productItem?.let { binding.detailAreaTv.text = it.area }
         productItem?.let { binding.detailNameTv.text = it.name }
         productItem?.let { binding.detailContentTv.text = it.description }
-        productItem?.let { binding.detailPriceTv.text = it.price }
+        productItem?.let { binding.detailPriceTv.text = it.price + "원" }
 
+
+        binding.detailLeftArrowIv.setOnClickListener {
+            finish()
+        }
     }
 }

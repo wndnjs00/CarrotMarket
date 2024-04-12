@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
      // 클릭했을때 DetailActivity로 이동하게끔하는 함수 [ 1) 그냥 intent를 사용해서 넘기는 방법 ]
     private fun adpaterOnClick(product: Product) {
         val intent = Intent(this, DetailActivity()::class.java)
-         // 데이터 전달부분
+         // 데이터 전달 (product 전체를 전달)
          intent.putExtra("product", product)
 
         startActivity(intent)
