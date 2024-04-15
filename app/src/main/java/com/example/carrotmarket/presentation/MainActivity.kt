@@ -101,8 +101,9 @@ class MainActivity : AppCompatActivity() {
         binding.notificationImg.setOnClickListener {
             notification()
         }
-
         createNotificationChannel()
+
+
     }
 
 
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    // 안드로이드 버전이 8.0이상인 경우만 채널 생성
+    // 사용자에게 알림 권한요청
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) {

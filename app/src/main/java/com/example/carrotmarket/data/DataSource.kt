@@ -96,7 +96,7 @@ class DataSource {
         Product(
             id = 7,
             image = R.drawable.sample7,
-            name = "울산 동해오션뷰 60평 복층 펜트하\n우스 1일 숙박권 펜션 힐링 숙소\n별장",
+            name = "울산 동해오션뷰 60평 복층 펜트\n하우스 1일 숙박권 펜션 힐링 숙소\n별장",
             area = "남구 옥동",
             price = 150000,
             comment = 54,
