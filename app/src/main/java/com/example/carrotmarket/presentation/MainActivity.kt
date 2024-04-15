@@ -171,12 +171,12 @@ class MainActivity : AppCompatActivity() {
                 with(binding.floatingButton){
                     // 최상단일때 플로팅버튼 안보이게
                     if (!binding.RecyclerView.canScrollVertically(-1)){     // 최상단
-                        animate().alpha(0f).duration = 5    // fade효과(투면도조절, 딜레이)
+                        animate().alpha(0f).duration = 1    // fade효과(투면도조절, 딜레이)
                         visibility = GONE
                     }else {
                         // 최상단이 아닐때 플로팅버튼 보이게
                         visibility = VISIBLE
-                        animate().alpha(1f).duration = 5
+                        animate().alpha(1f).duration = 1
                     }
                 }
             }
