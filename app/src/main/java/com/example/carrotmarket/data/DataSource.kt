@@ -20,13 +20,13 @@ class DataSource {
         }
     }
 
-    fun getProductList() : List<Product>{
+    fun getProductList() : MutableList<Product>{
         // 만들어놓은 데이터클래스 리턴
         return list
     }
 
 
-    val list = listOf(
+    val list = mutableListOf(
         Product(
             id = 1,
             image = R.drawable.sample1,

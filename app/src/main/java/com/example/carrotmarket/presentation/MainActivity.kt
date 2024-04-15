@@ -15,6 +15,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AlphaAnimation
@@ -34,6 +35,7 @@ import com.example.carrotmarket.R
 import com.example.carrotmarket.data.DataSource
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ActivityMainBinding
+import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,25 +54,6 @@ class MainActivity : AppCompatActivity() {
 
     private val notificationID = 1
     private val channelId = "default"
-
-
-    // 뒤로가기 버튼 눌렀을때 실행되는 콜백메소드
-    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            // 뒤로가기 실행시 실행할 다이얼로그(기본 다이얼로그 사용)
-            val dialog = AlertDialog.Builder(this@MainActivity)
-                .setTitle("종료")
-                .setMessage("정말로 종료하시겠습니까?")
-                .setIcon(R.drawable.chat_img)
-                .setPositiveButton("확인") { dialog, id ->
-                    finish()
-                }
-                .setNegativeButton("취소") { dialog, id ->
-                    Toast.makeText(this@MainActivity, "취소", Toast.LENGTH_SHORT).show()
-                }
-            dialog.show()   // 꼭 show적어주기!!
-        }
-    }
 
 
 
@@ -120,6 +103,30 @@ class MainActivity : AppCompatActivity() {
         // 리사이클러뷰 아래로 스크롤할때 플로팅버튼 나타나게
         binding.RecyclerView.addOnScrollListener(floatingScroll())
 
+
+        // 아이템 롱클릭시 삭제 다이얼로그 띄우기
+        productAdpater.itemLongClick = object : ProductAdpater.ItemLongClick{
+            override fun onLongClick(view: View, position: Int) {
+
+                AlertDialog.Builder(this@MainActivity)
+                    .setTitle("삭제")
+                    .setMessage("정말로 삭제하시겠습니까?")
+                    .setIcon(R.drawable.delete_img)
+                    .setPositiveButton("삭제") { dialog, _ ->
+                        // 아이템 롱클릭시 클릭한 아이템 삭제
+                        dataSource.removeAt(position)
+                        // 리스트크기와 아이템 동시에 갱신
+                        productAdpater.notifyDataSetChanged()
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("취소"){ dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+        }
+
+
     }
 
 
@@ -133,6 +140,24 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+
+    // 뒤로가기 버튼 눌렀을때 실행되는 콜백메소드
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            // 뒤로가기 실행시 실행할 다이얼로그(기본 다이얼로그 사용)
+            val dialog = AlertDialog.Builder(this@MainActivity)
+                .setTitle("종료")
+                .setMessage("정말로 종료하시겠습니까?")
+                .setIcon(R.drawable.chat_img)
+                .setPositiveButton("확인") { dialog, id ->
+                    finish()
+                }
+                .setNegativeButton("취소") { dialog, id ->
+                    Toast.makeText(this@MainActivity, "취소", Toast.LENGTH_SHORT).show()
+                }
+            dialog.show()   // 꼭 show적어주기!!
+        }
+    }
 
 
     // 사용자에게 알림 권한요청
@@ -184,6 +209,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
 }
+
 
