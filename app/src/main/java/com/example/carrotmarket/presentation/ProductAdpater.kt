@@ -11,9 +11,7 @@ import java.text.DecimalFormat
 
 
 // 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현
-class ProductAdpater(private val onClick : (Product) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
-
-    var productList = listOf<Product>()
+class ProductAdpater(var productList : List<Product>, private val onClick : (Product) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
 
 
     // 화면(레이아웃) 연결

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     private val productAdpater: ProductAdpater by lazy {
         // 클릭 이벤트 (람다함수를 사용해서 아이템 클릭이벤트 구현)
-        ProductAdpater { product ->
+        ProductAdpater(productList = ArrayList<Product>()) { product ->
             // 클릭시 DetailActivity로 이동
             adpaterOnClick(product)
         }
