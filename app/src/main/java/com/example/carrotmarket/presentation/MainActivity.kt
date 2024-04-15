@@ -39,6 +39,10 @@ import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
 
+    private val notificationID = 1
+    private val channelId = "default"
+
+
     // lazy를 사용해서 호출될때 뷰바인딩이 초기회되도록
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -51,9 +55,6 @@ class MainActivity : AppCompatActivity() {
             adpaterOnClick(product)
         }
     }
-
-    private val notificationID = 1
-    private val channelId = "default"
 
 
 
@@ -100,34 +101,18 @@ class MainActivity : AppCompatActivity() {
             binding.RecyclerView.smoothScrollToPosition(0)
         }
 
+
         // 리사이클러뷰 아래로 스크롤할때 플로팅버튼 나타나게
         binding.RecyclerView.addOnScrollListener(floatingScroll())
 
 
-        // 아이템 롱클릭시 삭제 다이얼로그 띄우기
-        productAdpater.itemLongClick = object : ProductAdpater.ItemLongClick{
-            override fun onLongClick(view: View, position: Int) {
-
-                AlertDialog.Builder(this@MainActivity)
-                    .setTitle("삭제")
-                    .setMessage("정말로 삭제하시겠습니까?")
-                    .setIcon(R.drawable.delete_img)
-                    .setPositiveButton("삭제") { dialog, _ ->
-                        // 아이템 롱클릭시 클릭한 아이템 삭제
-                        dataSource.removeAt(position)
-                        // 리스트크기와 아이템 동시에 갱신
-                        productAdpater.notifyDataSetChanged()
-                        dialog.dismiss()
-                    }
-                    .setNegativeButton("취소"){ dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .show()
-            }
-        }
-
+        // 아이템 롱클릭시 삭제 다이얼로그 띄우고 삭제되도록
+        productAdpater.itemLongClick = LongClick()
 
     }
+
+
+
 
 
 
@@ -207,6 +192,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+    //아이템 롱클릭시 삭제 다이얼로그 띄우고 삭제하는 함수
+    private fun LongClick() : ProductAdpater.ItemLongClick{
+        return object : ProductAdpater.ItemLongClick {
+
+            override fun onLongClick(view: View, position: Int) {
+
+                val dataSource = DataSource.getDataSource().getProductList()
+
+                AlertDialog.Builder(this@MainActivity)
+                    .setTitle("삭제")
+                    .setMessage("정말로 삭제하시겠습니까?")
+                    .setIcon(R.drawable.delete_img)
+                    .setPositiveButton("삭제") { dialog, _ ->
+                        // 아이템 롱클릭시 클릭한 아이템 삭제
+                        dataSource.removeAt(position)
+                        // 리스트크기와 아이템 동시에 갱신
+                        productAdpater.notifyDataSetChanged()
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("취소"){ dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+        }
+    }
+
 
 
 }
