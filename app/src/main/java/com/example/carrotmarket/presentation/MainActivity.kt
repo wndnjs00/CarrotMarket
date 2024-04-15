@@ -215,6 +215,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     .setNegativeButton("취소"){ dialog, _ ->
                         dialog.dismiss()
+                        Toast.makeText(this@MainActivity, "취소", Toast.LENGTH_SHORT).show()
                     }
                     .show()
             }

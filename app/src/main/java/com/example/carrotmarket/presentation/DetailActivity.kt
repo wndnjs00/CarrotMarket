@@ -27,13 +27,15 @@ class DetailActivity : AppCompatActivity() {
         val intent = getIntent()
         val productItem = intent?.getParcelableExtra<Product>("product")
 
-        // 레이아웃과 받아온 데이터 연결
-        productItem?.let { Glide.with(this).load(it.image).into(binding.detailItemIv)}  //이미지는 Glide사용
-        productItem?.let { binding.detailSellerTv.text = it.seller }
-        productItem?.let { binding.detailAreaTv.text = it.area }
-        productItem?.let { binding.detailNameTv.text = it.name }
-        productItem?.let { binding.detailContentTv.text = it.description }
-        productItem?.let { binding.detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"}
+        productItem?.let {
+            Glide.with(this).load(it.image).into(binding.detailItemIv)  //이미지는 Glide사용
+            binding.detailSellerTv.text = it.seller
+            binding.detailAreaTv.text = it.area
+            binding.detailNameTv.text = it.name
+            binding.detailContentTv.text = it.description
+            binding.detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
+        }
+
 
         binding.detailLeftArrowIv.setOnClickListener {
             finish()

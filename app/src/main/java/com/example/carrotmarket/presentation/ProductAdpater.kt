@@ -65,6 +65,7 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
             }
         }
 
+
         // 레이아웃과 데이터 연결
         fun bind(product: Product){
             currentProduct = product
