@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // 아이템 롱클릭시 삭제 다이얼로그 띄우고 삭제되도록
-        productAdpater.itemLongClick = LongClick()
+        productAdpater.itemLongClick = longClick()
 
     }
 
@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity() {
 
 
     //아이템 롱클릭시 삭제 다이얼로그 띄우고 삭제하는 함수
-    private fun LongClick() : ProductAdpater.ItemLongClick{
+    private fun longClick() : ProductAdpater.ItemLongClick{
         return object : ProductAdpater.ItemLongClick {
 
             override fun onLongClick(view: View, position: Int) {
