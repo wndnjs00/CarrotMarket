@@ -15,6 +15,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.view.animation.AlphaAnimation
 import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
@@ -25,6 +28,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.carrotmarket.R
 import com.example.carrotmarket.data.DataSource
 import com.example.carrotmarket.data.Product
@@ -94,17 +99,29 @@ class MainActivity : AppCompatActivity() {
         )
         binding.RecyclerView.addItemDecoration(decoration)
 
+
         // 뒤로가기를 onBackPressedDispatcher를 통해 등록
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
 
+        // 알람
         binding.notificationImg.setOnClickListener {
             notification()
         }
         createNotificationChannel()
 
 
+        // 플로팅 버튼 클릭시
+        binding.floatingButton.setOnClickListener {
+            // 최상단 이동
+            binding.RecyclerView.smoothScrollToPosition(0)
+        }
+
+        // 리사이클러뷰 아래로 스크롤할때 플로팅버튼 나타나게
+        binding.RecyclerView.addOnScrollListener(floatingScroll())
+
     }
+
 
 
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
@@ -140,6 +157,30 @@ class MainActivity : AppCompatActivity() {
             .setContentText("설정한 키워드에 대한 알림이 도착했습니다!!")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         NotificationManagerCompat.from(this).notify(notificationID, builder.build())
+    }
+
+
+    // 리사이클러뷰 아래로 스크롤할때 플로팅버튼 나타나도록 / 최상단일때는 플로팅버튼 안보이게
+    // OnScrollListener는 스크롤 상태가 변경될때마다 호출
+    // 나타나고 사라질때 fade효과
+    private fun floatingScroll() : RecyclerView.OnScrollListener{
+        return object : RecyclerView.OnScrollListener(){
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                with(binding.floatingButton){
+                    // 최상단일때 플로팅버튼 안보이게
+                    if (!binding.RecyclerView.canScrollVertically(-1)){     // 최상단
+                        animate().alpha(0f).duration = 5    // fade효과(투면도조절, 딜레이)
+                        visibility = GONE
+                    }else {
+                        // 최상단이 아닐때 플로팅버튼 보이게
+                        visibility = VISIBLE
+                        animate().alpha(1f).duration = 5
+                    }
+                }
+            }
+        }
     }
 
 
