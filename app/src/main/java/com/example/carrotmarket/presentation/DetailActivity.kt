@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.example.carrotmarket.R
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ActivityDetailBinding
@@ -27,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
         val productItem = intent?.getParcelableExtra<Product>("product")
 
         // 레이아웃과 받아온 데이터 연결
-        productItem?.let { binding.detailItemIv.setImageResource(it.image) }    // Glide로 바꿔보기
+        productItem?.let { Glide.with(this).load(it.image).into(binding.detailItemIv)}  //이미지는 Glide사용
         productItem?.let { binding.detailSellerTv.text = it.seller }
         productItem?.let { binding.detailAreaTv.text = it.area }
         productItem?.let { binding.detailNameTv.text = it.name }

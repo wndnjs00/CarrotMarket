@@ -11,7 +11,7 @@ data class Product(
     val image : Int,            // 이미지
     val name : String,          // 제품먕
     val area : String,          // 지역명
-    val price : Int,         // 가격
+    val price : Int,            // 가격
     val comment : Int,          // 댓글 수
     val favorate : Int,         // 좋아요 수
     val description : String,   // 내용

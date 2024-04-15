@@ -20,13 +20,13 @@ class DataSource {
         }
     }
 
-    fun getProductList() : List<Product>{
+    fun getProductList() : MutableList<Product>{
         // 만들어놓은 데이터클래스 리턴
         return list
     }
 
 
-    val list = listOf(
+    val list = mutableListOf(
         Product(
             id = 1,
             image = R.drawable.sample1,
@@ -96,7 +96,7 @@ class DataSource {
         Product(
             id = 7,
             image = R.drawable.sample7,
-            name = "울산 동해오션뷰 60평 복층 펜트하우스 1일 숙박권 펜션 힐링 숙소 별장",
+            name = "울산 동해오션뷰 60평 복층 펜트\n하우스 1일 숙박권 펜션 힐링 숙소\n별장",
             area = "남구 옥동",
             price = 150000,
             comment = 54,

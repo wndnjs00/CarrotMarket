@@ -1,6 +1,7 @@
 package com.example.carrotmarket.presentation
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,9 +12,14 @@ import java.text.DecimalFormat
 
 
 // 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현
-class ProductAdpater(private val onClick : (Product) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
+class ProductAdpater(var productList : MutableList<Product>, private val onClick : (Product) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
 
-    var productList = listOf<Product>()
+
+    // 아이템 롱클릭을 위한 인터페이스 추가
+    interface ItemLongClick{
+        fun onLongClick(view : View, position: Int)
+    }
+    var itemLongClick : ItemLongClick?= null
 
 
     // 화면(레이아웃) 연결
@@ -33,6 +39,15 @@ class ProductAdpater(private val onClick : (Product) -> Unit) : RecyclerView.Ada
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         // bind함수에 있는 함수를 가져와서 데이터 뿌려줌
         holder.bind(productList[position])
+
+        // 2초간 클릭했을때 아이템 삭제 (setOnLongClickListener 사용)
+        val longClick = android.os.Handler()
+        holder.itemView.setOnLongClickListener{
+            longClick.postDelayed({
+                itemLongClick?.onLongClick(it, position)
+            }, 2000) //2초
+            true
+        }
 
     }
 
