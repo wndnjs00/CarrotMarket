@@ -28,12 +28,14 @@ class DetailActivity : AppCompatActivity() {
         val productItem = intent?.getParcelableExtra<Product>("product")
 
         productItem?.let {
-            Glide.with(this).load(it.image).into(binding.detailItemIv)  //이미지는 Glide사용
-            binding.detailSellerTv.text = it.seller
-            binding.detailAreaTv.text = it.area
-            binding.detailNameTv.text = it.name
-            binding.detailContentTv.text = it.description
-            binding.detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
+            with(binding) {
+                Glide.with(this@DetailActivity).load(it.image).into(this.detailItemIv)
+                detailSellerTv.text = it.seller
+                detailAreaTv.text = it.area
+                detailNameTv.text = it.name
+                detailContentTv.text = it.description
+                detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
+            }
         }
 
 
