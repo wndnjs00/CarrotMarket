@@ -17,5 +17,5 @@ data class Product(
     val description : String,   // 내용
     val seller : String,         // 판매자
 
-    var isLike : Boolean = false        // 좋아요 처리 (클릭O-> true, 클릭X -> false
+    var isLike : Boolean = false        // 좋아요 처리 (클릭O-> true, 클릭X -> false)
 ) : Parcelable

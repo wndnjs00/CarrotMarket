@@ -1,6 +1,7 @@
 package com.example.carrotmarket.presentation
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -41,6 +42,7 @@ class DetailActivity : AppCompatActivity() {
                 detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
 
                 if (it.isLike) {
+                    // isLike가 true일때 색칠
                     detailHeartIv.setImageResource(R.drawable.fullheart_img)
                 } else {
                     detailHeartIv.setImageResource(R.drawable.heat_img)
@@ -60,7 +62,7 @@ class DetailActivity : AppCompatActivity() {
             val product = dataSoure[position!!]
             product.isLike = !product.isLike
 
-            if (product.isLike) {
+            if (product.isLike == true) {
                 Snackbar.make(binding.linearLayout, "관심 목록에 추가되었습니다", Snackbar.LENGTH_SHORT).show()
                 product.favorate++
                 binding.detailHeartIv.setImageResource(R.drawable.fullheart_img)
@@ -69,9 +71,10 @@ class DetailActivity : AppCompatActivity() {
                 binding.detailHeartIv.setImageResource(R.drawable.heat_img)
             }
 
-            //좋아요 수를 메인으로 연결하기
-            intent.putExtra("position", position)
-            intent.putExtra("likeCount", product.favorate)
+            // Mainactivtiy로 전달
+            intent.putExtra("position", position)           // 클릭한 위치
+            intent.putExtra("likeCount", product.favorate)  // 좋아요 수
+
             setResult(Activity.RESULT_OK, intent)
         }
 

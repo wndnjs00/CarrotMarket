@@ -94,9 +94,8 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
             }
 
             binding.itemHeartIv.setOnClickListener {
-                data.isLike = !data.isLike
                 // 클릭되어있다면(true라면)
-                if (data.isLike){
+                if (data.isLike == true){
                     // 좋아요 수 늘리기
                     data.favorate++
                 }else{

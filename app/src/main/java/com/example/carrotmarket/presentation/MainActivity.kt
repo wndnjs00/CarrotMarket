@@ -50,8 +50,10 @@ class MainActivity : AppCompatActivity() {
     private val getResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val position = result.data?.getIntExtra("position",0)
-                val likeCount = result.data?.getIntExtra("likeCount",0)
+
+                // DetailActivity에서 전달한 데이터 받아옴
+                val position = result.data?.getIntExtra("position",0)   // 클릭한 위치
+                val likeCount = result.data?.getIntExtra("likeCount",0) // 좋아요 수
 
                     if (likeCount != null) {
                         val dataSource = DataSource.getDataSource().getProductList()
@@ -124,13 +126,14 @@ class MainActivity : AppCompatActivity() {
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
     private fun adpaterOnClick(product: Product , position : Int) {
         val intent = Intent(this, DetailActivity()::class.java)
-        val dataSource = DataSource.getDataSource().getProductList()
+
 
         // 데이터 전달 (product 전체를 전달)
         intent.putExtra("product", product)
 
-        intent.putExtra("position", dataSource[position])   // 클릭한 위치값 전달
-        Log.d(TAG, dataSource[position].toString())
+//        val dataSource = DataSource.getDataSource().getProductList()
+        intent.putExtra("position", position)   // 클릭한 위치값 전달
+        Log.d(TAG, position.toString())
 
         getResult.launch(intent)
     }
