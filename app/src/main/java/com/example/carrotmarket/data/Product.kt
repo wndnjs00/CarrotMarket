@@ -13,7 +13,9 @@ data class Product(
     val area : String,          // 지역명
     val price : Int,            // 가격
     val comment : Int,          // 댓글 수
-    val favorate : Int,         // 좋아요 수
+    var favorate : Int,         // 좋아요 수!
     val description : String,   // 내용
-    val seller : String         // 판매자
+    val seller : String,         // 판매자
+
+    var isLike : Boolean,        // 좋아요 처리!
 ) : Parcelable

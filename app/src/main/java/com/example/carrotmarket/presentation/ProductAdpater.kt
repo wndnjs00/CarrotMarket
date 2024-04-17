@@ -70,15 +70,16 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
         fun bind(product: Product){
             currentProduct = product
 
-            binding.itemNameTv.text = product.name
-            binding.itemAreaTv.text = product.area
-            binding.itemPriceTv.text = DecimalFormat("#,###").format(product.price).toString() + "원"    // 가격은 천단위 콤마표시
-            binding.itemCommentTv.text = product.comment.toString()
-            binding.itemHeartTv.text = product.favorate.toString()
-
-            Glide.with(itemView.context)
-                .load(product.image)
-                .into(binding.itemIv)
+            product.let{
+                with(binding){
+                    itemNameTv.text = it.name
+                    itemAreaTv.text = it.area
+                    itemPriceTv.text = DecimalFormat("#,###").format(it.price).toString() + "원"    // 가격은 천단위 콤마표시
+                    itemCommentTv.text = it.comment.toString()
+                    itemHeartTv.text = it.favorate.toString()
+                    Glide.with(itemView.context).load(it.image).into(itemIv)
+                }
+            }
 
         }
 
