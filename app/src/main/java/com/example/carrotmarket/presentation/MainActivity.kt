@@ -29,7 +29,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ReportFragment.Companion.reportFragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +41,7 @@ import com.example.carrotmarket.R
 import com.example.carrotmarket.data.DataSource
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ActivityMainBinding
+import com.example.carrotmarket.viewModel.FavorateViewModel
 import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +50,6 @@ class MainActivity : AppCompatActivity() {
     private val channelId = "default"
 
     private val TAG = MainActivity::class.java.simpleName
-
 
     // lazy를 사용해서 호출될때 뷰바인딩이 초기회되도록
     private val binding: ActivityMainBinding by lazy {
@@ -57,9 +60,25 @@ class MainActivity : AppCompatActivity() {
         // 클릭 이벤트 (람다함수를 사용해서 아이템 클릭이벤트 구현)
         ProductAdpater(productList = ArrayList<Product>()) { product ->
             // 클릭시 DetailActivity로 이동
-            adpaterOnClick(product)
+            adpaterOnClick(product, position = 0)
         }
     }
+
+    private val getResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val position = result.data?.getIntExtra("position", -1)
+                val likeCount = result.data?.getIntExtra("likeCount", -1)
+                if (position != -1 && likeCount != -1) {
+                    if (likeCount != null) {
+                        val dataSource = DataSource.getDataSource().getProductList()
+                        dataSource[position!!].favorate = likeCount
+                    }
+                    productAdpater.notifyDataSetChanged()
+                }
+            }
+
+        }
 
 
 
@@ -114,6 +133,14 @@ class MainActivity : AppCompatActivity() {
         // 아이템 롱클릭시 삭제 다이얼로그 띄우고 삭제되도록
         productAdpater.itemLongClick = longClick()
 
+
+        // viewModel로 뿌린 데이터 받아오기
+//        val favorateViewModel = ViewModelProvider(this).get(FavorateViewModel::class.java)
+
+//        favorateViewModel.favorateData.observe(LifecycleOwner, Observer {
+//
+//        })
+
     }
 
 
@@ -122,14 +149,26 @@ class MainActivity : AppCompatActivity() {
 
 
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
-    private fun adpaterOnClick(product: Product) {
+    private fun adpaterOnClick(product: Product ,position : Int) {
         val intent = Intent(this, DetailActivity()::class.java)
+        val dataSource = DataSource.getDataSource().getProductList()
+
 
         // 데이터 전달 (product 전체를 전달)
         intent.putExtra("product", product)
+        intent.putExtra("position", position)
+        intent.putExtra("myItem", dataSource[position])
 
-        startActivity(intent)
+//        // DetailActivity로 좋아요 클릭했는지, 클릭한 위치 넘겨줌
+//        intent.putExtra("likeposition", dataSource[position].isLike)    // 클릭한 아이템 좋아요 데이터 전달 (좋아요O -> true, 좋아요X -> false)
+//        intent.putExtra("position", position)                           // 클릭한 아이템 위치정보 전달
+//        Log.d(TAG, dataSource[position].isLike.toString())
+//        Log.d(TAG, position.toString())
+
+//        startActivity(intent)
+        getResult.launch(intent)
     }
+
 
 
 

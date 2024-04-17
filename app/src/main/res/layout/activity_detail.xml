@@ -187,16 +187,16 @@
             tools:layout_editor_absoluteX="69dp"
             tools:layout_editor_absoluteY="546dp" />
 
-        <ImageView
-            android:id="@+id/detail_fullheart_iv"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="15dp"
-            android:visibility="gone"
-            app:srcCompat="@drawable/fullheart_img"
-            android:layout_gravity="center"
-            tools:layout_editor_absoluteX="69dp"
-            tools:layout_editor_absoluteY="546dp" />
+<!--        <ImageView-->
+<!--            android:id="@+id/detail_fullheart_iv"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:layout_marginStart="15dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:srcCompat="@drawable/fullheart_img"-->
+<!--            android:layout_gravity="center"-->
+<!--            tools:layout_editor_absoluteX="69dp"-->
+<!--            tools:layout_editor_absoluteY="546dp" />-->
 
         <View
             android:id="@+id/detail_line_view2"

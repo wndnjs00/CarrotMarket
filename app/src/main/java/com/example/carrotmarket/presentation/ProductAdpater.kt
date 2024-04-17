@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.carrotmarket.R
+import com.example.carrotmarket.data.DataSource
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ListItemBinding
 import java.text.DecimalFormat
@@ -40,6 +41,7 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
         // bind함수에 있는 함수를 가져와서 데이터 뿌려줌
         holder.bind(productList[position])
 
+
         // 2초간 클릭했을때 아이템 삭제 (setOnLongClickListener 사용)
         val longClick = android.os.Handler()
         holder.itemView.setOnLongClickListener{
@@ -70,6 +72,9 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
         fun bind(product: Product){
             currentProduct = product
 
+            val dataSource = DataSource.getDataSource().getProductList()
+            val product = dataSource[position]
+
             product.let{
                 with(binding){
                     itemNameTv.text = it.name
@@ -80,6 +85,23 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
                     Glide.with(itemView.context).load(it.image).into(itemIv)
                 }
             }
+
+            if (product.isLike){
+                binding.itemHeartIv.setImageResource(R.drawable.fullheart_img)
+            }else{
+                binding.itemHeartIv.setImageResource(R.drawable.heat_img)
+            }
+
+            binding.itemHeartIv.setOnClickListener {
+                product.isLike = !product.isLike
+                if (product.isLike){
+                    product.favorate++
+                }else{
+                    product.favorate--
+                }
+
+            }
+
 
         }
 

@@ -53,4 +53,8 @@ dependencies {
 
     // Glide사용 라이브러리
     implementation ("com.github.bumptech.glide:glide:4.12.0")
+
+    // viewModel, LiveData 추가
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 }
