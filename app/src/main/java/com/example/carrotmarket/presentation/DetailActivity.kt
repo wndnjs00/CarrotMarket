@@ -37,12 +37,8 @@ class DetailActivity : AppCompatActivity() {
                 detailNameTv.text = it.name
                 detailContentTv.text = it.description
                 detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
-
-//                detailHeartIv.setImageResource(if(isLiked){R.drawable.fullheart_img} else{R.drawable.heat_img})
             }
-//           isLiked = it.isLike == true
         }
-
 
 
         binding.detailLeftArrowIv.setOnClickListener {
@@ -78,21 +74,6 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
-
-//    private fun exit(){
-//        val likePosition = intent.getIntExtra("likePosition",0)
-//        val intent = Intent(this, MainActivity::class.java).apply {
-//            putExtra("likePosition", likePosition)
-//            putExtra("isLiked",isLiked)
-//        }
-//        setResult(RESULT_OK, intent)
-//        finish()
-//    }
-
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//        exit()
-//    }
 
 
 

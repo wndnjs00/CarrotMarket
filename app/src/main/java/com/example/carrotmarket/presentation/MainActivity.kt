@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         // 클릭 이벤트 (람다함수를 사용해서 아이템 클릭이벤트 구현)
         ProductAdpater(productList = ArrayList<Product>()) { product ->
             // 클릭시 DetailActivity로 이동
-            adpaterOnClick(product, position = 0)
+            adpaterOnClick(product)
         }
     }
 
@@ -119,21 +119,14 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
-    private fun adpaterOnClick(product: Product, position : Int) {
+    private fun adpaterOnClick(product: Product) {
         val intent = Intent(this, DetailActivity()::class.java)
 
         // 데이터 전달 (product 전체를 전달)
         intent.putExtra("product", product)
 
-//        val dataSource = DataSource.getDataSource().getProductList()
-//        intent.putExtra("likePosition", position)   // 아이템의 위치 정보 전달
-//        intent.putExtra("myItem", dataSource[position]) // 클릭한 아이템 데이터전달
-
         startActivity(intent)
-//        getContent.launch(intent)
 
     }
 
@@ -235,27 +228,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-//    val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-//        if (it.resultCode == RESULT_OK){
-//            val dataSource = DataSource.getDataSource().getProductList()
-//
-//            val likePosition = it.data?.getIntExtra("likeposition",0) as Int
-//            val isLiked = it.data?.getBooleanExtra("isLiked", false) as Boolean
-//
-//            if(isLiked){
-//                dataSource[likePosition].isLike = true
-//                dataSource[likePosition].favorate += 1
-//            }else{
-//                if (dataSource[likePosition].isLike){
-//                    dataSource[likePosition].isLike = false
-//                    dataSource[likePosition].favorate -= 1
-//                }
-//            }
-//
-//            productAdpater.notifyItemChanged(likePosition)
-//        }
-//    }
 
 
 
