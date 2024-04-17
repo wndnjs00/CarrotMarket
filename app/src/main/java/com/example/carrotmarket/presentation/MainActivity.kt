@@ -2,17 +2,7 @@ package com.example.carrotmarket.presentation
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.icu.lang.UCharacter.VerticalOrientation
-import android.media.AudioAttributes
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -20,29 +10,20 @@ import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.animation.AlphaAnimation
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.carrotmarket.R
 import com.example.carrotmarket.data.DataSource
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ActivityMainBinding
-import com.example.carrotmarket.viewModel.FavorateViewModel
-import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,17 +45,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    // 데이터를 받을 엑티비티에서 생성해주기
     private val getResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val position = result.data?.getIntExtra("position", -1)
-                val likeCount = result.data?.getIntExtra("likeCount", -1)
-                if (position != -1 && likeCount != -1) {
+                val position = result.data?.getIntExtra("position",0)
+                val likeCount = result.data?.getIntExtra("likeCount",0)
+
                     if (likeCount != null) {
                         val dataSource = DataSource.getDataSource().getProductList()
                         dataSource[position!!].favorate = likeCount
                     }
-                    productAdpater.notifyDataSetChanged()
+                if (position != null) {
+                    productAdpater.notifyItemChanged(position)
                 }
             }
 
@@ -133,39 +117,21 @@ class MainActivity : AppCompatActivity() {
         // 아이템 롱클릭시 삭제 다이얼로그 띄우고 삭제되도록
         productAdpater.itemLongClick = longClick()
 
-
-        // viewModel로 뿌린 데이터 받아오기
-//        val favorateViewModel = ViewModelProvider(this).get(FavorateViewModel::class.java)
-
-//        favorateViewModel.favorateData.observe(LifecycleOwner, Observer {
-//
-//        })
-
     }
 
 
 
-
-
-
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
-    private fun adpaterOnClick(product: Product ,position : Int) {
+    private fun adpaterOnClick(product: Product , position : Int) {
         val intent = Intent(this, DetailActivity()::class.java)
         val dataSource = DataSource.getDataSource().getProductList()
 
-
         // 데이터 전달 (product 전체를 전달)
         intent.putExtra("product", product)
-        intent.putExtra("position", position)
-        intent.putExtra("myItem", dataSource[position])
 
-//        // DetailActivity로 좋아요 클릭했는지, 클릭한 위치 넘겨줌
-//        intent.putExtra("likeposition", dataSource[position].isLike)    // 클릭한 아이템 좋아요 데이터 전달 (좋아요O -> true, 좋아요X -> false)
-//        intent.putExtra("position", position)                           // 클릭한 아이템 위치정보 전달
-//        Log.d(TAG, dataSource[position].isLike.toString())
-//        Log.d(TAG, position.toString())
+        intent.putExtra("position", dataSource[position])   // 클릭한 위치값 전달
+        Log.d(TAG, dataSource[position].toString())
 
-//        startActivity(intent)
         getResult.launch(intent)
     }
 

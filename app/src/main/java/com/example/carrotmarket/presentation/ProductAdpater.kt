@@ -73,7 +73,7 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
             currentProduct = product
 
             val dataSource = DataSource.getDataSource().getProductList()
-            val product = dataSource[position]
+            val data = dataSource[position]
 
             product.let{
                 with(binding){
@@ -86,18 +86,21 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
                 }
             }
 
-            if (product.isLike){
+            // 좋아요 버튼 클릭시
+            if (data.isLike){
                 binding.itemHeartIv.setImageResource(R.drawable.fullheart_img)
             }else{
                 binding.itemHeartIv.setImageResource(R.drawable.heat_img)
             }
 
             binding.itemHeartIv.setOnClickListener {
-                product.isLike = !product.isLike
-                if (product.isLike){
-                    product.favorate++
+                data.isLike = !data.isLike
+                // 클릭되어있다면(true라면)
+                if (data.isLike){
+                    // 좋아요 수 늘리기
+                    data.favorate++
                 }else{
-                    product.favorate--
+                    data.favorate--
                 }
 
             }
