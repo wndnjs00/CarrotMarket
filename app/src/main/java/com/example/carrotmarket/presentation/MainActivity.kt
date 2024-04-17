@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
 
+
     // lazy를 사용해서 호출될때 뷰바인딩이 초기회되도록
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -39,20 +40,21 @@ class MainActivity : AppCompatActivity() {
 
     private val productAdpater: ProductAdpater by lazy {
         // 클릭 이벤트 (람다함수를 사용해서 아이템 클릭이벤트 구현)
-        ProductAdpater(productList = ArrayList<Product>()) { product ->
+        ProductAdpater(productList = ArrayList<Product>()) { product->
             // 클릭시 DetailActivity로 이동
-            adpaterOnClick(product, position = 0)
+            adpaterOnClick(product)
         }
     }
 
 
     // 데이터를 받을 엑티비티에서 생성해주기
+    @SuppressLint("SuspiciousIndentation")
     private val getResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
             if (result.resultCode == Activity.RESULT_OK) {
 
                 // DetailActivity에서 전달한 데이터 받아옴
-                val position = result.data?.getIntExtra("position",0)   // 클릭한 위치
+                val position = result.data?.getIntExtra("position", 0)   // 클릭한 위치
                 val likeCount = result.data?.getIntExtra("likeCount",0) // 좋아요 수
 
                     if (likeCount != null) {
@@ -124,16 +126,13 @@ class MainActivity : AppCompatActivity() {
 
 
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
-    private fun adpaterOnClick(product: Product , position : Int) {
+    private fun adpaterOnClick(product: Product) {
         val intent = Intent(this, DetailActivity()::class.java)
-
-
         // 데이터 전달 (product 전체를 전달)
         intent.putExtra("product", product)
 
-//        val dataSource = DataSource.getDataSource().getProductList()
-        intent.putExtra("position", position)   // 클릭한 위치값 전달
-        Log.d(TAG, position.toString())
+        intent.putExtra("position", product.id)   // 클릭한 위치값 전달
+        Log.d(TAG, product.id.toString())
 
         getResult.launch(intent)
     }

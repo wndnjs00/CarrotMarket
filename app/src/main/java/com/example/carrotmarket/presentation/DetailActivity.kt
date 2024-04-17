@@ -30,7 +30,7 @@ class DetailActivity : AppCompatActivity() {
         val productItem = intent?.getParcelableExtra<Product>("product")
 
         val dataSoure = DataSource.getDataSource().getProductList()
-        val position = intent?.getIntExtra("position",0)
+        val position = intent?.getIntExtra("position", productItem!!.id.toInt())    // -1만 해주면돰!!
 
         productItem?.let {
             with(binding) {
@@ -41,7 +41,7 @@ class DetailActivity : AppCompatActivity() {
                 detailContentTv.text = it.description
                 detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
 
-                if (it.isLike) {
+                if (it.isLike == true) {
                     // isLike가 true일때 색칠
                     detailHeartIv.setImageResource(R.drawable.fullheart_img)
                 } else {

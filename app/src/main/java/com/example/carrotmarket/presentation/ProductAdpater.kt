@@ -3,6 +3,8 @@ package com.example.carrotmarket.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.carrotmarket.R
@@ -21,6 +23,7 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
         fun onLongClick(view : View, position: Int)
     }
     var itemLongClick : ItemLongClick?= null
+
 
 
     // 화면(레이아웃) 연결
@@ -50,6 +53,7 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
             }, 2000) //2초
             true
         }
+
 
     }
 
@@ -101,14 +105,9 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
                 }else{
                     data.favorate--
                 }
-
             }
-
-
         }
-
     }
-
 
 
 }
