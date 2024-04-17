@@ -119,6 +119,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
     private fun adpaterOnClick(product: Product) {
         val intent = Intent(this, DetailActivity()::class.java)
@@ -127,7 +129,6 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("product", product)
 
         startActivity(intent)
-
     }
 
 
@@ -227,7 +228,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
 

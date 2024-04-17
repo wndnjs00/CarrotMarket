@@ -18,7 +18,6 @@ class DetailActivity : AppCompatActivity() {
         ActivityDetailBinding.inflate(layoutInflater)
     }
 
-//    private var isLiked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +38,7 @@ class DetailActivity : AppCompatActivity() {
                 detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
             }
         }
+
 
 
         binding.detailLeftArrowIv.setOnClickListener {
@@ -73,7 +73,6 @@ class DetailActivity : AppCompatActivity() {
         }
 
     }
-
 
 
 
