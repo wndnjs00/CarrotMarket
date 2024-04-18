@@ -209,6 +209,7 @@ class MainActivity : AppCompatActivity() {
     private fun longClick() : ProductAdpater.ItemLongClick{
         return object : ProductAdpater.ItemLongClick {
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onLongClick(view: View, position: Int) {
 
                 val dataSource = DataSource.getDataSource().getProductList()
