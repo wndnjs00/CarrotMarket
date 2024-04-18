@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
 
     private val productAdpater: ProductAdpater by lazy {
         // 클릭 이벤트 (람다함수를 사용해서 아이템 클릭이벤트 구현)
-        ProductAdpater(productList = ArrayList<Product>()) { product->
+        ProductAdpater(productList = ArrayList<Product>()) { product, postion ->
             // 클릭시 DetailActivity로 이동
-            adpaterOnClick(product)
+            adpaterOnClick(product, postion)
         }
     }
 
@@ -121,18 +121,19 @@ class MainActivity : AppCompatActivity() {
         // 아이템 롱클릭시 삭제 다이얼로그 띄우고 삭제되도록
         productAdpater.itemLongClick = longClick()
 
+
     }
 
 
 
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
-    private fun adpaterOnClick(product: Product) {
+    private fun adpaterOnClick(product: Product, postion : Int) {
         val intent = Intent(this, DetailActivity()::class.java)
         // 데이터 전달 (product 전체를 전달)
         intent.putExtra("product", product)
 
-        intent.putExtra("position", product.id)   // 클릭한 위치값 전달
-        Log.d(TAG, product.id.toString())
+        intent.putExtra("position", postion)   // 클릭한 위치값 전달!!!
+        Log.d(TAG, postion.toString())
 
         getResult.launch(intent)
     }

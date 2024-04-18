@@ -15,7 +15,7 @@ import java.text.DecimalFormat
 
 
 // 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현
-class ProductAdpater(var productList : MutableList<Product>, private val onClick : (Product) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
+class ProductAdpater(var productList : MutableList<Product>, private val onClick : (Product, Int) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
 
 
     // 아이템 롱클릭을 위한 인터페이스 추가
@@ -29,7 +29,7 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
     // 화면(레이아웃) 연결
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-        return ProductViewHolder(ListItemBinding.bind(view), onClick)
+        return ProductViewHolder(ListItemBinding.bind(view))
     }
 
 
@@ -41,8 +41,14 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
 
     // 데이터 연결
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        val currentItemPosition = productList[position]
+
         // bind함수에 있는 함수를 가져와서 데이터 뿌려줌
-        holder.bind(productList[position])
+        holder.bind(currentItemPosition)
+
+        holder.itemView.setOnClickListener {
+            onClick(currentItemPosition, position)
+        }
 
 
         // 2초간 클릭했을때 아이템 삭제 (setOnLongClickListener 사용)
@@ -59,18 +65,9 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
 
 
 
-    class ProductViewHolder(private var binding : ListItemBinding, private val onClick: (Product) -> Unit) : RecyclerView.ViewHolder(binding.root){
+    class ProductViewHolder(private var binding : ListItemBinding) : RecyclerView.ViewHolder(binding.root){
+
         private var currentProduct : Product ?= null
-
-        init {
-            // 클릭 리스너 (아이템 클릭시)
-            itemView.setOnClickListener {
-                currentProduct?.let {
-                    onClick.invoke(it)
-                }
-            }
-        }
-
 
         // 레이아웃과 데이터 연결
         fun bind(product: Product){
