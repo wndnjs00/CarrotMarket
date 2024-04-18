@@ -42,10 +42,10 @@ class DetailActivity : AppCompatActivity() {
                 detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
 
                 if (it.isLike == true) {
-                    // isLike가 true일때 색칠
-                    detailHeartIv.setImageResource(R.drawable.fullheart_img)
+                    // isLike가 true일때 색칠된 하트로
+                    Glide.with(this@DetailActivity).load(R.drawable.fullheart_img).into(detailHeartIv)
                 } else {
-                    detailHeartIv.setImageResource(R.drawable.heat_img)
+                    Glide.with(this@DetailActivity).load(R.drawable.heat_img).into(detailHeartIv)
                 }
             }
         }
@@ -66,11 +66,11 @@ class DetailActivity : AppCompatActivity() {
             if (product.isLike == true) {
                 Snackbar.make(binding.linearLayout, "관심 목록에 추가되었습니다", Snackbar.LENGTH_SHORT).show()
                 product.favorate++
-                binding.detailHeartIv.setImageResource(R.drawable.fullheart_img)
+                Glide.with(this@DetailActivity).load(R.drawable.fullheart_img).into(binding.detailHeartIv)
             } else {
                 Snackbar.make(binding.linearLayout, "관심 목록에서 해제되었습니다", Snackbar.LENGTH_SHORT).show()
                 product.favorate--
-                binding.detailHeartIv.setImageResource(R.drawable.heat_img)
+                Glide.with(this@DetailActivity).load(R.drawable.heat_img).into(binding.detailHeartIv)
             }
 
             // Mainactivtiy로 전달
