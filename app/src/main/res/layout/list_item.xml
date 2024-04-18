@@ -54,7 +54,7 @@
 
         <TextView
             android:id="@+id/item_name_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:text="제품명"
             android:maxLines="2"
@@ -129,6 +129,17 @@
             android:layout_marginStart="12dp"
             tools:layout_editor_absoluteX="104dp"
             tools:layout_editor_absoluteY="30dp" />
+
+        <ImageView
+            android:id="@+id/item_fullheart_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:srcCompat="@drawable/fullheart_img"
+            android:visibility="gone"
+            android:layout_marginStart="12dp"
+            tools:layout_editor_absoluteX="104dp"
+            tools:layout_editor_absoluteY="30dp" />
+
 
         <TextView
             android:id="@+id/item_heart_tv"

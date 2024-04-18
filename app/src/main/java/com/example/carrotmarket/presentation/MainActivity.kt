@@ -1,46 +1,36 @@
 package com.example.carrotmarket.presentation
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.icu.lang.UCharacter.VerticalOrientation
-import android.media.AudioAttributes
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.animation.AlphaAnimation
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.carrotmarket.R
 import com.example.carrotmarket.data.DataSource
 import com.example.carrotmarket.data.Product
 import com.example.carrotmarket.databinding.ActivityMainBinding
-import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
 
     private val notificationID = 1
     private val channelId = "default"
+
+    private val TAG = MainActivity::class.java.simpleName
 
 
     // lazy를 사용해서 호출될때 뷰바인딩이 초기회되도록
@@ -50,11 +40,33 @@ class MainActivity : AppCompatActivity() {
 
     private val productAdpater: ProductAdpater by lazy {
         // 클릭 이벤트 (람다함수를 사용해서 아이템 클릭이벤트 구현)
-        ProductAdpater(productList = ArrayList<Product>()) { product ->
+        ProductAdpater(productList = ArrayList<Product>()) { product, position ->
             // 클릭시 DetailActivity로 이동
-            adpaterOnClick(product)
+            adpaterOnClick(product, position)
         }
     }
+
+
+    // 데이터를 받을 엑티비티에서 생성해주기
+    @SuppressLint("SuspiciousIndentation")
+    private val getResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+
+                // DetailActivity에서 전달한 데이터 받아옴
+                val position = result.data?.getIntExtra("position", 0)   // 클릭한 위치
+                val likeCount = result.data?.getIntExtra("likeCount",0) // 좋아요 수
+
+                    if (likeCount != null) {
+                        val dataSource = DataSource.getDataSource().getProductList()
+                        dataSource[position!!].favorate = likeCount
+                    }
+                if (position != null) {
+                    productAdpater.notifyItemChanged(position)
+                }
+            }
+
+        }
 
 
 
@@ -70,18 +82,18 @@ class MainActivity : AppCompatActivity() {
 
         // 리사이클러뷰 레이아웃과 어댑터연결
         with(binding.RecyclerView) {
-            adapter = productAdpater
+            adapter = productAdpater    // 리사이클러뷰와 어뎁터 연결
+            layoutManager = LinearLayoutManager(this@MainActivity)  // LinearLayoutManager사용
         }
 
-        // LinearLayoutManager사용
-        binding.RecyclerView.layoutManager = LinearLayoutManager(this)
 
         // 리사이클러뷰 구분선 표시
-        val decoration = DividerItemDecoration(
-            binding.RecyclerView.context,
-            LinearLayoutManager(this).orientation
-        )
-        binding.RecyclerView.addItemDecoration(decoration)
+        with(binding.RecyclerView){
+            val decoration = DividerItemDecoration(
+                context, LinearLayoutManager(this@MainActivity).orientation
+            )
+            addItemDecoration(decoration)
+        }
 
 
         // 뒤로가기를 onBackPressedDispatcher를 통해 등록
@@ -109,21 +121,25 @@ class MainActivity : AppCompatActivity() {
         // 아이템 롱클릭시 삭제 다이얼로그 띄우고 삭제되도록
         productAdpater.itemLongClick = longClick()
 
+
     }
-
-
-
 
 
 
     // 클릭했을때 DetailActivity로 이동하게끔하는 함수
-    private fun adpaterOnClick(product: Product) {
+    private fun adpaterOnClick(product: Product, position : Int) {
         val intent = Intent(this, DetailActivity()::class.java)
+
         // 데이터 전달 (product 전체를 전달)
         intent.putExtra("product", product)
 
-        startActivity(intent)
+        intent.putExtra("position", position)   // 클릭한 위치값 전달!!!
+        Log.d(TAG, position.toString())
+
+        getResult.launch(intent)
     }
+
+
 
 
     // 뒤로가기 버튼 눌렀을때 실행되는 콜백메소드
