@@ -28,7 +28,7 @@ class DataSource {
 
     val list = mutableListOf(
         Product(
-            id = 0,
+            id = 1,
             image = R.drawable.sample1,
             name = "산진 한달된 선풍기 팝니다",
             area = "서울 서대문구 창천동",
@@ -39,7 +39,7 @@ class DataSource {
             seller = "대현동"
         ),
         Product(
-            id = 1,
+            id = 2,
             image = R.drawable.sample2,
             name = "김치냉장고",
             area = "인천 계양구 귤현동",
@@ -50,7 +50,7 @@ class DataSource {
             seller = "안마담"
         ),
         Product(
-            id = 2,
+            id = 3,
             image = R.drawable.sample3,
             name = "샤넬 카드지갑",
             area = "수성구 범어동",
@@ -61,7 +61,7 @@ class DataSource {
             seller = "코코유"
         ),
         Product(
-            id = 3,
+            id = 4,
             image = R.drawable.sample4,
             name = "금고",
             area = "해운대구 우제2동",
@@ -72,7 +72,7 @@ class DataSource {
             seller = "Nicole"
         ),
         Product(
-            id = 4,
+            id = 5,
             image = R.drawable.sample5,
             name = "갤럭시Z플립3 팝니다",
             area = "연제구 연산제8동",
@@ -83,7 +83,7 @@ class DataSource {
             seller = "절명"
         ),
         Product(
-            id = 5,
+            id = 6,
             image = R.drawable.sample6,
             name = "프라다 복조리백",
             area = "수원시 영통구 원천동",
@@ -94,7 +94,7 @@ class DataSource {
             seller = "미니멀하게"
         ),
         Product(
-            id = 6,
+            id = 7,
             image = R.drawable.sample7,
             name = "울산 동해오션뷰 60평 복층 펜트하우스 1일 숙박권 펜션 힐링 숙소\n별장",
             area = "남구 옥동",
@@ -105,7 +105,7 @@ class DataSource {
             seller = "굿리치"
         ),
         Product(
-            id = 7,
+            id = 8,
             image = R.drawable.sample8,
             name = "샤넬 탑핸들 가방",
             area = "동래구 온천제2동",
@@ -116,7 +116,7 @@ class DataSource {
             seller = "난쉽"
         ),
         Product(
-            id = 8,
+            id = 9,
             image = R.drawable.sample9,
             name = "4행정 엔진분무기 판매합니다.",
             area = "원주시 명륜2동",
@@ -127,7 +127,7 @@ class DataSource {
             seller = "알뜰한"
         ),
         Product(
-            id = 9,
+            id = 10,
             image = R.drawable.sample10,
             name = "셀린느 버킷 가방",
             area = "중구 동화동",

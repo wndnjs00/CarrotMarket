@@ -14,7 +14,7 @@ import com.example.carrotmarket.databinding.ListItemBinding
 import java.text.DecimalFormat
 
 
-// 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현
+// 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현 (position값을 MainActivity로 전달하기위해 람다식에 Int값 추가)
 class ProductAdpater(var productList : MutableList<Product>, private val onClick : (Product, Int) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
 
 
@@ -46,6 +46,8 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
         // bind함수에 있는 함수를 가져와서 데이터 뿌려줌
         holder.bind(currentItemPosition)
 
+        // 아이템 클릭 리스너 설정
+        // postion값 넘겨주기!!
         holder.itemView.setOnClickListener {
             onClick(currentItemPosition, position)
         }
