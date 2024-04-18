@@ -58,6 +58,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
 
+        // 하트 눌렀을때
         binding.detailHeartIv.setOnClickListener {
             val product = dataSoure[position!!]
             product.isLike = !product.isLike
@@ -67,6 +68,7 @@ class DetailActivity : AppCompatActivity() {
                 product.favorate++
                 binding.detailHeartIv.setImageResource(R.drawable.fullheart_img)
             } else {
+                Snackbar.make(binding.linearLayout, "관심 목록에서 해제되었습니다", Snackbar.LENGTH_SHORT).show()
                 product.favorate--
                 binding.detailHeartIv.setImageResource(R.drawable.heat_img)
             }
