@@ -14,7 +14,7 @@ import com.example.carrotmarket.databinding.ListItemBinding
 import java.text.DecimalFormat
 
 
-// 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현 (position값을 MainActivity로 전달하기위해 람다식에 Int값 추가)
+// 어댑터에 람다함수를 사용해서 아이템 클릭이벤트 구현 (position값을 MainActivity로 전달하기위해 파라미터에 Int값 추가)
 class ProductAdpater(var productList : MutableList<Product>, private val onClick : (Product, Int) -> Unit) : RecyclerView.Adapter<ProductAdpater.ProductViewHolder>() {
 
 
@@ -89,15 +89,14 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
                 }
             }
 
-            // 좋아요 버튼 클릭시
-            if (data.isLike){
+            // 좋아요 버튼 클릭되어있다면
+            if (data.isLike == true){
                 binding.itemHeartIv.setImageResource(R.drawable.fullheart_img)
             }else{
                 binding.itemHeartIv.setImageResource(R.drawable.heat_img)
             }
 
             binding.itemHeartIv.setOnClickListener {
-                // 클릭되어있다면(true라면)
                 if (data.isLike == true){
                     // 좋아요 수 늘리기
                     data.favorate++

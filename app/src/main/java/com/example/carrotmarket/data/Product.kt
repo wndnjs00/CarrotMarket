@@ -13,7 +13,7 @@ data class Product(
     val area : String,          // 지역명
     val price : Int,            // 가격
     val comment : Int,          // 댓글 수
-    var favorate : Int,         // 좋아요 수!
+    var favorate : Int,         // 좋아요 수! (증가,감소처리 해줄거기때문에 var)
     val description : String,   // 내용
     val seller : String,         // 판매자
 

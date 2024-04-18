@@ -27,7 +27,9 @@ class DetailActivity : AppCompatActivity() {
 
         // getParcelableExtra사용해서 MainActivtiy에서 보낸 데이터 받아오기
         val intent = getIntent()
-        val productItem = intent?.getParcelableExtra<Product>("product")
+
+//        val productItem = intent?.getParcelableExtra<Product>("product")
+        val productItem = intent.getParcelableExtra("product") as? Product  //이렇게 쓸수도 있음!
 
         val dataSoure = DataSource.getDataSource().getProductList()
         val position = intent?.getIntExtra("position",0)
@@ -41,13 +43,14 @@ class DetailActivity : AppCompatActivity() {
                 detailContentTv.text = it.description
                 detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
 
-                // 이코드 안적어주면 다시 들어갔을때 DetailActivity에 이미지 반영X
+                // 이코드 안적어주면 다시 들어갔을때 DetailActivity에 하트이미지 반영X
                 if (it.isLike == true) {
                     // isLike가 true일때 색칠된 하트로
                     Glide.with(this@DetailActivity).load(R.drawable.fullheart_img).into(detailHeartIv)
                 } else {
                     Glide.with(this@DetailActivity).load(R.drawable.heat_img).into(detailHeartIv)
                 }
+
             }
         }
 
@@ -77,6 +80,7 @@ class DetailActivity : AppCompatActivity() {
             // Mainactivtiy로 전달
             intent.putExtra("position", position)           // 클릭한 위치
 
+            // 데이터를 보내는 엑티비티에 작성
             setResult(Activity.RESULT_OK, intent)
         }
 
