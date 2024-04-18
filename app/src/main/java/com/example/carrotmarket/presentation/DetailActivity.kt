@@ -41,6 +41,7 @@ class DetailActivity : AppCompatActivity() {
                 detailContentTv.text = it.description
                 detailPriceTv.text = DecimalFormat("#,###").format(it.price) + "원"
 
+                // 이코드 안적어주면 다시 들어갔을때 DetailActivity에 이미지 반영X
                 if (it.isLike == true) {
                     // isLike가 true일때 색칠된 하트로
                     Glide.with(this@DetailActivity).load(R.drawable.fullheart_img).into(detailHeartIv)
@@ -75,7 +76,6 @@ class DetailActivity : AppCompatActivity() {
 
             // Mainactivtiy로 전달
             intent.putExtra("position", position)           // 클릭한 위치
-            intent.putExtra("likeCount", product.favorate)  // 좋아요 수
 
             setResult(Activity.RESULT_OK, intent)
         }
