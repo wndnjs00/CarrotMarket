@@ -82,18 +82,18 @@ class MainActivity : AppCompatActivity() {
 
         // 리사이클러뷰 레이아웃과 어댑터연결
         with(binding.RecyclerView) {
-            adapter = productAdpater
+            adapter = productAdpater    // 리사이클러뷰와 어뎁터 연결
+            layoutManager = LinearLayoutManager(this@MainActivity)  // LinearLayoutManager사용
         }
 
-        // LinearLayoutManager사용
-        binding.RecyclerView.layoutManager = LinearLayoutManager(this)
 
         // 리사이클러뷰 구분선 표시
-        val decoration = DividerItemDecoration(
-            binding.RecyclerView.context,
-            LinearLayoutManager(this).orientation
-        )
-        binding.RecyclerView.addItemDecoration(decoration)
+        with(binding.RecyclerView){
+            val decoration = DividerItemDecoration(
+                context, LinearLayoutManager(this@MainActivity).orientation
+            )
+            addItemDecoration(decoration)
+        }
 
 
         // 뒤로가기를 onBackPressedDispatcher를 통해 등록
