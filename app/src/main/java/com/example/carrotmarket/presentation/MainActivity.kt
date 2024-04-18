@@ -55,12 +55,7 @@ class MainActivity : AppCompatActivity() {
 
                 // DetailActivity에서 전달한 데이터 받아옴
                 val position = result.data?.getIntExtra("position", 0)   // 클릭한 위치
-                val likeCount = result.data?.getIntExtra("likeCount",0) // 좋아요 수
 
-                    if (likeCount != null) {
-                        val dataSource = DataSource.getDataSource().getProductList()
-                        dataSource[position!!].favorate = likeCount
-                    }
                 if (position != null) {
                     productAdpater.notifyItemChanged(position)
                 }
