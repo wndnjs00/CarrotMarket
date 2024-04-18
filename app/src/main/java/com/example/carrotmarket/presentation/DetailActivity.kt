@@ -27,7 +27,9 @@ class DetailActivity : AppCompatActivity() {
 
         // getParcelableExtra사용해서 MainActivtiy에서 보낸 데이터 받아오기
         val intent = getIntent()
-        val productItem = intent?.getParcelableExtra<Product>("product")
+
+//        val productItem = intent?.getParcelableExtra<Product>("product")
+        val productItem = intent.getParcelableExtra("product") as? Product  //이렇게 쓸수도 있음!
 
         val dataSoure = DataSource.getDataSource().getProductList()
         val position = intent?.getIntExtra("position",0)
