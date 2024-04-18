@@ -30,7 +30,7 @@ class DetailActivity : AppCompatActivity() {
         val productItem = intent?.getParcelableExtra<Product>("product")
 
         val dataSoure = DataSource.getDataSource().getProductList()
-        val position = intent?.getIntExtra("position", productItem!!.id.toInt())    // -1만 해주면돰!!
+        val position = intent?.getIntExtra("position",0)
 
         productItem?.let {
             with(binding) {
