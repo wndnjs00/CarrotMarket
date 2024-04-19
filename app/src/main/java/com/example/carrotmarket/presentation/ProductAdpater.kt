@@ -96,14 +96,6 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
                 binding.itemHeartIv.setImageResource(R.drawable.heat_img)
             }
 
-            binding.itemHeartIv.setOnClickListener {
-                if (data.isLike == true){
-                    // 좋아요 수 늘리기
-                    data.favorate++
-                }else{
-                    data.favorate--
-                }
-            }
         }
     }
 
