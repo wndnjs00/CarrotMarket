@@ -28,4 +28,6 @@
 
 ### 2) DetailActivtiy
 
-<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/ab810b20-58a7-43ca-90e8-a9532314015d" width="200" height="400">
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/b1fdbbfe-dda6-41c5-bdf5-bdc90474e38c" width="200" height="400">
+
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/b1fdbbfe-dda6-41c5-bdf5-bdc90474e38c" width="200" height="400">
