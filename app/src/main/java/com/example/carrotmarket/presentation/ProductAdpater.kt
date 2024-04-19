@@ -43,11 +43,11 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val currentItemPosition = productList[position]
 
-        // bind함수에 있는 함수를 가져와서 데이터 뿌려줌
+        // bind함수에 있는 데이터 가져와서 뿌려줌
         holder.bind(currentItemPosition)
 
         // 아이템 클릭 리스너 설정
-        // postion값 넘겨주기!!
+        // postion값 넘겨주기!!!
         holder.itemView.setOnClickListener {
             onClick(currentItemPosition, position)
         }
