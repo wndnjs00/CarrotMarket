@@ -30,4 +30,4 @@
 
 <img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/b1fdbbfe-dda6-41c5-bdf5-bdc90474e38c" width="200" height="400">
 
-<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/b1fdbbfe-dda6-41c5-bdf5-bdc90474e38c" width="200" height="400">
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/849d850e-88fd-42b5-9fd5-2ab1e007b0b1" width="200" height="400">
