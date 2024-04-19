@@ -9,7 +9,14 @@
 
 ## 🛠️ 상세기능
 ### 1) 메인 엑티비티
-<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/6b6b54cc-0ae9-4b9f-a78c-9094343100e0" width="200" height="400">
+
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/ab810b20-58a7-43ca-90e8-a9532314015d" width="200" height="400">
 
 
 <img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/4c943a69-6bab-4a16-a609-4e9a8db2abc5" width="200" height="400">
+
+
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/6756ca79-7625-462e-8c49-2f6d018ca67a" width="200" height="400">
+
+
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/6c521f8a-87b0-43f4-9775-7e9de31d4ff6" width="200" height="400">
