@@ -59,7 +59,9 @@
 
 
 <img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/849d850e-88fd-42b5-9fd5-2ab1e007b0b1" width="200" height="400">
-<br/><br/>-> 버튼을 눌렀을때 DonutListFragment 화면이 나타나도록 구현
-<br/>-> 버튼을 눌렀을때 DonutListFragment 화면이 나타나도록 구현
+<br/><br/>-> 상품 상세 화면에서 좋아요 선택시 좋아요 아이콘 변경 및 Snackbar 메세지 표시
+<br/>-> 메인 화면으로 돌아오면 해당 상품에 좋아요 표시 및 좋아요 카운트 +1
+<br/>-> 상세 화면에서 좋아요 해제시 이전 상태로 되돌림
+<br/>-> 클릭한 postion값 전달한뒤, registerForActivityResult를 사용하여 구현
 <br/><br/><br/><br/>
 
