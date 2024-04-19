@@ -75,9 +75,6 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
         fun bind(product: Product){
             currentProduct = product
 
-            val dataSource = DataSource.getDataSource().getProductList()
-            val data = dataSource[position]
-
             product.let{
                 with(binding){
                     itemNameTv.text = it.name
@@ -88,6 +85,9 @@ class ProductAdpater(var productList : MutableList<Product>, private val onClick
                     Glide.with(itemView.context).load(it.image).into(itemIv)
                 }
             }
+
+            val dataSource = DataSource.getDataSource().getProductList()
+            val data = dataSource[position]
 
             // 좋아요 버튼 클릭되어있다면
             if (data.isLike == true){
