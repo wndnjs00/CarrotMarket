@@ -9,3 +9,7 @@
 
 ## 🛠️ 상세기능
 ### 1) 메인 엑티비티
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/6b6b54cc-0ae9-4b9f-a78c-9094343100e0" width="200" height="400">
+
+
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/4c943a69-6bab-4a16-a609-4e9a8db2abc5" width="200" height="400">
