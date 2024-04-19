@@ -14,8 +14,6 @@ import java.text.DecimalFormat
 
 class DetailActivity : AppCompatActivity() {
 
-    private val TAG = DetailActivity::class.java.simpleName
-
     private val binding: ActivityDetailBinding by lazy {
         ActivityDetailBinding.inflate(layoutInflater)
     }
