@@ -8,7 +8,7 @@
 9. **다이얼로그**, **알림** 기능 사용</br></br>
 
 ## 🛠️ 상세기능
-### 1) 메인 엑티비티
+### 1) MainActivity
 
 <img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/ab810b20-58a7-43ca-90e8-a9532314015d" width="200" height="400">
 
@@ -23,3 +23,9 @@
 
 
 <img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/d11adfcc-62b2-41f4-9da7-a5ab8bfe19a7" width="200" height="400">
+
+
+
+### 2) DetailActivtiy
+
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/ab810b20-58a7-43ca-90e8-a9532314015d" width="200" height="400">
