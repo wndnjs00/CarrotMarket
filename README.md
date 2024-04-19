@@ -20,3 +20,6 @@
 
 
 <img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/6c521f8a-87b0-43f4-9775-7e9de31d4ff6" width="200" height="400">
+
+
+<img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/d11adfcc-62b2-41f4-9da7-a5ab8bfe19a7" width="200" height="400">
