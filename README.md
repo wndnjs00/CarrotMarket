@@ -1,6 +1,6 @@
 ## 📚 학습내용
 1. **viewBinding** 사용
-2. **RecyclerView**를 사용
+2. **RecyclerView** 사용
 4. **람다식**을 사용하여 아이템 클릭 이벤트 구현
 5. **Parcelize**를 사용하여 dummy data를 전달하고 받아오기 구현
 7. **싱글톤**을 사용하여 데이터 관리
