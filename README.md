@@ -52,7 +52,7 @@
 
 <img src="https://github.com/wndnjs00/CarrotMarket/assets/89961868/b1fdbbfe-dda6-41c5-bdf5-bdc90474e38c" width="200" height="400">
 <br/><br/>-> 람다식을 사용하여 아이템 클릭 이벤트 구현
-<br/>-> MainActivity에서 전달한 데이터를 받아와서 레이아웃에 뿌려줌
+<br/>-> Parcelize를 사용하여 dummy data를 전달하고 받아오기 구현
 <br/>-> 하단 가격표시 레이아웃을 제외하고 전체화면은 스크롤되도록 구현
 <br/><br/><br/><br/>
 
